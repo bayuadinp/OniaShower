@@ -1,0 +1,37 @@
+! Names are case-insensitive  -  but spellings-sensitive!
+! The changes here are illustrative,not always physics-motivated.
+
+! 1) Settings that will be used in a main program.
+Main:numberOfEvents = 1000          ! number of events to generate
+!Main:timesAllowErrors = 3          ! abort run after this many flawed events
+Parallelism:numThreads = 60        ! Use 8 CPU cores (set to your CPU core count)
+Parallelism:processAsync = off     ! Recommended setting for simple event generation
+
+! 2) Settings related to output in init(),next() and stat().
+Init:showChangedSettings = on      ! list changed settings
+Init:showAllSettings = off         ! list all settings
+Init:showChangedParticleData = on  ! list changed particle data
+Init:showAllParticleData = off     ! list all particle data
+Next:numberCount = 200000          ! print message every n events
+Next:numberShowLHA = 1             ! print LHA information n times
+Next:numberShowInfo = 1            ! print event information n times
+Next:numberShowProcess = 1         ! print process record n times
+Next:numberShowEvent = 1           ! print event record n times
+Stat:showPartonLevel = on          ! additional statistics on MPI
+
+! 3) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 2212                   ! first beam,p = 2212,pbar = -2212
+Beams:idB = 2212                   ! second beam,p = 2212,pbar = -2212
+Beams:eCM = 5360.                 ! CM energy of collision
+HardQCD:all                     = on
+
+! 4) Pick processes and kinematics cuts.
+! Colour singlet charmoniumshower production of J/psi and chi_c.
+CharmoniumShower:g2ccbar(3S1)[3S1(8)] = on,off
+ColourReconnection:mode = 0
+
+! 5) Decay processes
+OniaShower:ldmeFac              = 1.
+443:onMode                      = off
+443:onIfAny                     = 13 -13
+PhaseSpace:pTHatMin             = 10.
